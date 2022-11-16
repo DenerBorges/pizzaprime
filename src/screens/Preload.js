@@ -16,9 +16,9 @@ const Preload = ({navigation}) => {
             routes: [{name: 'AppStack'}],
           }),
         );
-      } catch (error) {
-        console.error('Preload, entrar: ' + error);
-        switch (error.code) {
+      } catch (e) {
+        console.error('Preload, entrar: ' + e);
+        switch (e.code) {
           case 'auth/user-not-found':
             Alert.alert('Erro', 'Usuário não cadastrado.');
             break;

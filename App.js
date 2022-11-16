@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const AuthStack = () => {
     return (
-      <NavigationContainer>
+      <NavigationContainer independent={true}>
         <StatusBar backgroundColor={COLORS.primaryDark} />
         <Stack.Navigator
           initialRouteName="Preload"
