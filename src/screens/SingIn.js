@@ -32,6 +32,13 @@ const SingIn = ({navigation}) => {
     if (email !== '' && password !== '') {
       try {
         await auth().signInWithEmailAndPassword(email, password);
+        if (!auth().currentUser.emailVerified) {
+          Alert.alert(
+            'Erro',
+            'Você deve verificar o seu email para confirmar o cadastro.',
+          );
+          return;
+        }
         await storeUserSession({
           email,
           password,
@@ -137,9 +144,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 180,
+    height: 180,
     margin: 5,
+    marginBottom: 15,
   },
   input: {
     width: '95%',

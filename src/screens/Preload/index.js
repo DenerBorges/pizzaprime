@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
+import {Alert} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
+import {Container, Image} from './styles';
 
 const Preload = ({navigation}) => {
   const entrar = async (email, password) => {
@@ -67,9 +68,12 @@ const Preload = ({navigation}) => {
   }, []);
 
   return (
-    <View>
-      <Text>Preload</Text>
-    </View>
+    <Container>
+      <Image
+        source={require('../../assets/images/logo.png')}
+        accessibilityLabel="logo do app"
+      />
+    </Container>
   );
 };
 

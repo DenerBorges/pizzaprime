@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, Alert} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import MyButton from '../componentes/MyButton';
+import {COLORS} from '../assets/colors';
 
 const RecuperarSenha = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -39,6 +40,7 @@ const RecuperarSenha = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Recuperar Senha</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -57,6 +59,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+  },
+  text: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Verdana',
+    color: COLORS.primary,
+    padding: 20,
   },
   input: {
     width: '95%',

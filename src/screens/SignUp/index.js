@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert} from 'react-native';
 import MyButton from '../../componentes/MyButton';
-import {Body, TextInput} from './styles';
+import {Body, Text, TextInput} from './styles';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 
@@ -59,6 +59,7 @@ const SignUp = ({navigation}) => {
   };
   return (
     <Body>
+      <Text>Cadastre-se</Text>
       <TextInput
         placeholder="Nome Completo"
         keyboardType="default"

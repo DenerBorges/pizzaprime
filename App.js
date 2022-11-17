@@ -18,19 +18,16 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const AuthStack = () => {
     return (
-      <NavigationContainer independent={true}>
-        <StatusBar backgroundColor={COLORS.primaryDark} />
-        <Stack.Navigator
-          initialRouteName="Preload"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Preload" component={Preload} />
-          <Stack.Screen name="SingIn" component={SingIn} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Preload"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Preload" component={Preload} />
+        <Stack.Screen name="SingIn" component={SingIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
+      </Stack.Navigator>
     );
   };
 
@@ -65,6 +62,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={COLORS.primaryDark} />
       <Stack.Navigator
         initialRouteName="AuthStack"
         screenOptions={{
