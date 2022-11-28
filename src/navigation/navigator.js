@@ -2,7 +2,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Estudantes from '../screens/Estudantes';
+import Usuarios from '../screens/Usuarios';
+import Usuario from '../screens/Usuario';
 import SingIn from '../../src/screens/SingIn';
 import SignUp from '../../src/screens/SignUp';
 import RecuperarSenha from '../../src/screens/RecuperarSenha';
@@ -33,15 +34,25 @@ export default function App() {
 
   const AppStack = () => (
     <Tab.Navigator
-      initialRouteName="Estudantes"
+      initialRouteName="Usuarios"
       screenOptions={{
         headerShown: false,
       }}>
       <Tab.Screen
-        name="Estudantes"
-        component={Estudantes}
+        name="Usuarios"
+        component={Usuarios}
         options={{
-          tabBarLabel: 'Estudantes',
+          tabBarLabel: 'Usuários',
+          tabBarIcon: () => (
+            <Icon name="people" color={COLORS.primary} size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Usuario"
+        component={Usuario}
+        options={{
+          tabBarLabel: 'Usuário',
           tabBarIcon: () => (
             <Icon name="people" color={COLORS.primary} size={20} />
           ),
@@ -53,7 +64,7 @@ export default function App() {
         options={{
           tabBarLabel: 'OutraHome',
           tabBarIcon: () => (
-            <Icon name="people" color={COLORS.primary} size={20} />
+            <Icon name="person" color={COLORS.primary} size={20} />
           ),
         }}
       />

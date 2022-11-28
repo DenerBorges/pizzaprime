@@ -1,11 +1,11 @@
 import React from 'react';
-import {EstudanteProvider} from '../context/EstudanteProvider';
+import {UsuarioProvider} from '../context/UsuarioProvider';
 import Navigator from './navigator';
 
 export default function Providers() {
   return (
-    <EstudanteProvider>
+    <UsuarioProvider>
       <Navigator />
-    </EstudanteProvider>
+    </UsuarioProvider>
   );
 }

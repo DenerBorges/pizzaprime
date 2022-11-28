@@ -1,12 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Alert} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 import {Container, Image} from './styles';
 
+import {UsuarioContext} from '../../context/UsuarioProvider';
+
 const Preload = ({navigation}) => {
+  const {getUsuarios} = useContext(UsuarioContext);
+
   const entrar = async (email, password) => {
     if (email !== '' && password !== '') {
       try {
@@ -65,6 +69,11 @@ const Preload = ({navigation}) => {
 
   useEffect(() => {
     loginAutomatico();
+    const unsubscribeUsuarios = getUsuarios();
+
+    return () => {
+      unsubscribeUsuarios;
+    };
   }, []);
 
   return (

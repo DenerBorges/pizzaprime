@@ -10,8 +10,10 @@ import {
   Alert,
 } from 'react-native';
 import MyButton from '../componentes/MyButton';
+import Loading from '../componentes/Loading';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
+import {COLORS} from '../assets/colors';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 const SingIn = ({navigation}) => {
@@ -31,18 +33,21 @@ const SingIn = ({navigation}) => {
   const entrar = async () => {
     if (email !== '' && password !== '') {
       try {
+        setLoading(true);
         await auth().signInWithEmailAndPassword(email, password);
         if (!auth().currentUser.emailVerified) {
           Alert.alert(
             'Erro',
             'Você deve verificar o seu email para confirmar o cadastro.',
           );
+          setLoading(false);
           return;
         }
         await storeUserSession({
           email,
           password,
         });
+        setLoading(false);
         navigation.dispatch(
           CommonActions.reset({
             index: 0,
@@ -50,6 +55,7 @@ const SingIn = ({navigation}) => {
           }),
         );
       } catch (e) {
+        setLoading(false);
         console.error('SignIn, entrar: ' + e);
         switch (e.code) {
           case 'auth/user-not-found':
@@ -120,9 +126,9 @@ const SingIn = ({navigation}) => {
               Cadastre-se
             </Text>
           </View>
-          {/* {loading && <Loading />} */}
         </View>
       </ScrollView>
+      {loading && <Loading />}
     </SafeAreaView>
   );
 };
@@ -160,7 +166,7 @@ const styles = StyleSheet.create({
   },
   textEsqueceuSenha: {
     fontSize: 15,
-    color: 'blue',
+    color: `${COLORS.primaryLight}`,
     alignSelf: 'flex-end',
     marginTop: 10,
     marginBottom: 10,
@@ -196,7 +202,7 @@ const styles = StyleSheet.create({
   },
   textCadastrarSe: {
     fontSize: 16,
-    color: 'blue',
+    color: `${COLORS.primaryLight}`,
     marginLeft: 5,
   },
 });
