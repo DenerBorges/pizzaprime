@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
 import {Container, TextInput, Text} from './styles';
 
 import MyButton from '../../componentes/MyButton';
@@ -12,11 +12,11 @@ const Usuario = ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [idade, setIdade] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const {saveUsuario, deleteUsuario} = useContext(UsuarioContext);
 
   useEffect(() => {
-    console.log(route.params.usuario);
+    //console.log(route.params.usuario);
     setUid('');
     setNome('');
     setEmail('');
@@ -28,7 +28,7 @@ const Usuario = ({route, navigation}) => {
       setIdade(route.params.usuario.idade);
     }
     return () => {
-      console.log('desmontou Usuario');
+      //console.log('desmontou Usuario');
     };
   }, [route]);
 
@@ -42,6 +42,7 @@ const Usuario = ({route, navigation}) => {
       setLoading(true);
       await saveUsuario(usuario);
       setLoading(false);
+      ToastAndroid.show('Dados salvos.', ToastAndroid.SHORT);
       navigation.goBack();
     } else {
       Alert.alert('Atenção', 'Digite todos os campos.');
@@ -61,6 +62,7 @@ const Usuario = ({route, navigation}) => {
           setLoading(true);
           await deleteUsuario(uid);
           setLoading(false);
+          ToastAndroid.show('Usuário excluído.', ToastAndroid.SHORT);
           navigation.goBack();
         },
       },

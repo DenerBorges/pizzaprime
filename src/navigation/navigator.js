@@ -7,7 +7,7 @@ import Usuario from '../screens/Usuario';
 import SingIn from '../../src/screens/SingIn';
 import SignUp from '../../src/screens/SignUp';
 import RecuperarSenha from '../../src/screens/RecuperarSenha';
-import OutraHome from '../../src/screens/OutraHome';
+import Perfil from '../../src/screens/Perfil';
 import Preload from '../../src/screens/Preload';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {StatusBar} from 'react-native';
@@ -54,17 +54,17 @@ export default function App() {
         options={{
           tabBarLabel: 'Usuário',
           tabBarIcon: () => (
-            <Icon name="people" color={COLORS.primary} size={20} />
+            <Icon name="person-add" color={COLORS.primary} size={20} />
           ),
         }}
       />
       <Tab.Screen
-        name="OutraHome"
-        component={OutraHome}
+        name="Perfil"
+        component={Perfil}
         options={{
-          tabBarLabel: 'OutraHome',
+          tabBarLabel: 'Perfil',
           tabBarIcon: () => (
-            <Icon name="person" color={COLORS.primary} size={20} />
+            <Icon name="person-circle" color={COLORS.primary} size={30} />
           ),
         }}
       />

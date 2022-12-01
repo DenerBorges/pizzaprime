@@ -1,21 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {CommonActions} from '@react-navigation/native';
 import {UsuarioContext} from '../../context/UsuarioProvider';
 
-import {Container, FlatList} from './styles';
+import {Container} from './styles';
 import Item from './item';
 import Loading from '../../componentes/Loading';
 import AddFloatButton from '../../componentes/AddFloatButton';
 
 const Usuarios = ({navigation}) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const {usuarios} = useContext(UsuarioContext);
-
-  useEffect(() => {
-    setData(usuarios);
-    setLoading(false);
-  }, [usuarios]);
 
   const routeUsuario = item => {
     //console.log(item);
@@ -36,17 +30,11 @@ const Usuarios = ({navigation}) => {
     );
   };
 
-  const renderItem = ({item}) => {
-    <Item item={item} onPress={() => routeUsuario(item)} />;
-  };
-
   return (
     <Container>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.uid}
-      />
+      {usuarios.map((v, k) => (
+        <Item item={v} onPress={() => routeUsuario(v)} key={k} />
+      ))}
       <AddFloatButton onClick={routeAddUsuario} />
       {loading && <Loading />}
     </Container>
