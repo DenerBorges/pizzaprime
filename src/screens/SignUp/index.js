@@ -1,62 +1,35 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Alert} from 'react-native';
 import MyButton from '../../componentes/MyButton';
+import Loading from '../../componentes/Loading';
 import {Body, Text, TextInput} from './styles';
-import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
+import {AuthUserContext} from '../../context/AuthUserProvider';
 
 const SignUp = ({navigation}) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [loading, setLoading] = useState(false);
+  const {signUp} = useContext(AuthUserContext);
 
-  const cadastrar = () => {
+  const cadastrar = async () => {
     if (nome !== '' && email !== '' && pass !== '' && confirmPass !== '') {
-      auth()
-        .createUserWithEmailAndPassword(email, pass)
-        .then(() => {
-          let userF = auth().currentUser;
-          userF
-            .sendEmailVerification()
-            .then(() => {
-              Alert.alert(
-                'Informação',
-                'Foi enviado um email para: ' + email + ' para verificação.',
-              );
-              navigation.dispatch(
-                CommonActions.reset({
-                  index: 0,
-                  routes: [{name: 'SingIn'}],
-                }),
-              );
-            })
-            .catch(e => {
-              console.error('SignUp, cadastrar: ' + e);
-            });
-        })
-        .catch(e => {
-          console.error('SignUp, cadastrar: ' + e);
-          switch (e.code) {
-            case 'auth/email-already-in-use':
-              Alert.alert('Erro', 'Email já está em uso.');
-              break;
-            case 'auth/operation-not-allowed':
-              Alert.alert('Erro', 'Problema em cadastrar o usuário.');
-              break;
-            case 'auth/invalid-email':
-              Alert.alert('Erro', 'Email inválido.');
-              break;
-            case 'auth/weak-password':
-              Alert.alert(
-                'Erro',
-                'Senha fraca, por favor utilizar uma senha forte.',
-              );
-              break;
-          }
-        });
+      setLoading(true);
+      await signUp(email, pass);
+      setLoading(false);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'SingIn'}],
+        }),
+      );
+    } else {
+      Alert.alert('Atenção', 'Você deve preencher todos os campos.');
     }
   };
+
   return (
     <Body>
       <Text>Cadastre-se</Text>
@@ -100,8 +73,8 @@ const SignUp = ({navigation}) => {
         onEndEditing={() => cadastrar()}
       />
       <MyButton texto="Cadastrar" onClick={cadastrar} />
+      {loading && <Loading />}
     </Body>
   );
 };
-
 export default SignUp;

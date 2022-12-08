@@ -16,12 +16,12 @@ const Usuario = ({route, navigation}) => {
   const {saveUsuario, deleteUsuario} = useContext(UsuarioContext);
 
   useEffect(() => {
-    //console.log(route.params.usuario);
+    //console.log(route.params);
     setUid('');
     setNome('');
     setEmail('');
     setIdade('');
-    if (route.params.usuario) {
+    if (route.params !== undefined && route.params.usuario) {
       setUid(route.params.usuario.uid);
       setNome(route.params.usuario.nome);
       setEmail(route.params.usuario.email);
