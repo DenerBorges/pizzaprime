@@ -12,18 +12,18 @@ const Button = styled.TouchableHighlight`
 `;
 
 const TextNome = styled.Text`
-  font-size: 16px;
+  font-size: 24px;
   text-align: justify;
   color: ${COLORS.white};
 `;
 
 const TextEmail = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
   color: ${COLORS.white};
 `;
 
 const TextIdade = styled.Text`
-  font-size: 24px;
+  font-size: 16px;
   color: ${COLORS.white};
 `;
 
@@ -31,9 +31,9 @@ const Item = ({item, onPress}) => {
   return (
     <Button onPress={onPress} underlayColor="transparent">
       <>
-        <TextNome>{item.nome}</TextNome>
-        <TextEmail>{item.email}</TextEmail>
-        <TextIdade>{item.idade}</TextIdade>
+        <TextNome>Nome: {item.nome}</TextNome>
+        <TextEmail>Email: {item.email}</TextEmail>
+        <TextIdade>Idade: {item.idade}</TextIdade>
       </>
     </Button>
   );

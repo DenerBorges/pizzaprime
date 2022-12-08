@@ -30,7 +30,7 @@ const Perfil = ({navigation}) => {
       />
       <Text>Nome: "Nome do Usuário"</Text>
       <Text>Email: "Email do Usuário"</Text>
-      <MyButton texto="Sair" onClick={SignOut} style="marginTop: 80" />
+      <MyButton texto="Sair" onClick={SignOut} />
     </Container>
   );
 };
