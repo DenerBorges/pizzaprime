@@ -81,11 +81,20 @@ export const AuthUserProvider = ({children}) => {
     }
   };
 
+  const signOut = async () => {
+    try {
+      await EncryptedStorage.removeItem('user_session');
+    } catch (e) {
+      console.error('AuthUserProvider, signOut' + e);
+    }
+  };
+
   return (
     <AuthUserContext.Provider
       value={{
         signUp,
         signIn,
+        signOut,
       }}>
       {children}
     </AuthUserContext.Provider>

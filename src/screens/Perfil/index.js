@@ -1,24 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Container, Text, Image} from './styles';
 import MyButton from '../../componentes/MyButton';
 import {CommonActions} from '@react-navigation/native';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import {AuthUserContext} from '../../context/AuthUserProvider';
 
 const Perfil = ({navigation}) => {
-  async function removeUserSession() {
-    try {
-      await EncryptedStorage.removeItem('user_session');
-    } catch (error) {}
-  }
+  const {signOut} = useContext(AuthUserContext);
 
   const SignOut = async () => {
-    await removeUserSession();
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'AuthStack'}],
-      }),
-    );
+    if (await signOut()) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'AuthStack'}],
+        }),
+      );
+    }
   };
 
   return (
