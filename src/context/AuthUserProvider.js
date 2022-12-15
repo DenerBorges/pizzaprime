@@ -14,6 +14,41 @@ export const AuthUserProvider = ({children}) => {
     }
   }
 
+  async function retrieveUserSession() {
+    try {
+      const session = await EncryptedStorage.getItem('user_session');
+      if (session) {
+        let localUser = JSON.parse(session);
+        return localUser;
+      }
+      return null;
+    } catch (error) {
+      console.error('Preload, retrieveUserSession: ' + error);
+      return null;
+    }
+  }
+
+  const recoverPass = async email => {
+    try {
+      await auth().sendPasswordResetEmail(email);
+      return true;
+    } catch (e) {
+      switch (e.code) {
+        case 'auth/user-not-found':
+          Alert.alert('Erro', 'Usuário não cadastrado.');
+          break;
+        case 'auth/invalid-email':
+          Alert.alert('Erro', 'Email inválido.');
+          break;
+        case 'auth/user-disabled':
+          Alert.alert('Erro', 'Usuário desabilitado.');
+          break;
+      }
+      console.error('AuthUserProvider, recoverPass: ' + e);
+      return false;
+    }
+  };
+
   const signUp = async (email, pass) => {
     try {
       await auth().createUserWithEmailAndPassword(email, pass);
@@ -84,8 +119,10 @@ export const AuthUserProvider = ({children}) => {
   const signOut = async () => {
     try {
       await EncryptedStorage.removeItem('user_session');
+      return true;
     } catch (e) {
       console.error('AuthUserProvider, signOut' + e);
+      return false;
     }
   };
 
@@ -95,6 +132,8 @@ export const AuthUserProvider = ({children}) => {
         signUp,
         signIn,
         signOut,
+        retrieveUserSession,
+        recoverPass,
       }}>
       {children}
     </AuthUserContext.Provider>
