@@ -6,10 +6,12 @@ import {Container, Image} from './styles';
 
 import {UsuarioContext} from '../../context/UsuarioProvider';
 import {AuthUserContext} from '../../context/AuthUserProvider';
+import {ApiContext} from '../../context/ApiProvider';
 
 const Preload = ({navigation}) => {
   const {getUsuarios} = useContext(UsuarioContext);
   const {signIn, retrieveUserSession} = useContext(AuthUserContext);
+  const {getApi} = useContext(ApiContext);
 
   const entrar = async (email, password) => {
     if (email !== '' && password !== '') {
@@ -45,6 +47,7 @@ const Preload = ({navigation}) => {
 
   useEffect(() => {
     loginAutomatico();
+    getApi();
     const unsubscribeUsuarios = getUsuarios();
 
     return () => {

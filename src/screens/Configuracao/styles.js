@@ -8,8 +8,6 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Text = styled.Text`
-  justify-content: center;
-  align-items: center;
   font-size: 20px;
   font-weight: bold;
   font-family: Verdana;

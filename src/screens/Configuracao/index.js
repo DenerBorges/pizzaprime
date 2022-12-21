@@ -1,11 +1,14 @@
 import React, {useContext} from 'react';
 import {Container, Text, Image} from './styles';
+import Item from './item';
 import MyButton from '../../componentes/MyButton';
 import {CommonActions} from '@react-navigation/native';
 import {AuthUserContext} from '../../context/AuthUserProvider';
+import {UsuarioContext} from '../../context/UsuarioProvider';
 
-const Perfil = ({navigation}) => {
+const Configuracao = ({navigation, item}) => {
   const {signOut} = useContext(AuthUserContext);
+  const {usuarios} = useContext(UsuarioContext);
 
   const SignOut = async () => {
     if (await signOut()) {
@@ -25,11 +28,12 @@ const Perfil = ({navigation}) => {
         source={require('../../assets/images/perfil.png')}
         accessibilityLabel="perfil do usuario"
       />
-      <Text>Nome: "Nome do Usuário"</Text>
-      <Text>Email: "Email do Usuário"</Text>
+      {usuarios.map((v, k) => (
+        <Item item={v} key={k} />
+      ))}
       <MyButton texto="Sair" onClick={SignOut} />
     </Container>
   );
 };
 
-export default Perfil;
+export default Configuracao;
