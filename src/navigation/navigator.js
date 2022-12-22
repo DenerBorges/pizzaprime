@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Usuarios from '../screens/Usuarios';
 import Usuario from '../screens/Usuario';
 import Pizzas from '../screens/Pizzas';
+import Pizza from '../screens/Pizza';
 import SingIn from '../screens/SingIn';
 import SignUp from '../screens/SignUp';
 import RecuperarSenha from '../screens/RecuperarSenha';
@@ -67,6 +68,16 @@ export default function App() {
           tabBarLabel: 'Pizzas',
           tabBarIcon: () => (
             <Icon name="pizza" color={COLORS.primary} size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Pizza"
+        component={Pizza}
+        options={{
+          tabBarLabel: 'Pedido',
+          tabBarIcon: () => (
+            <Icon name="cart" color={COLORS.primary} size={20} />
           ),
         }}
       />

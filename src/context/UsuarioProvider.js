@@ -20,6 +20,8 @@ export const UsuarioProvider = ({children}) => {
               nome: doc.data().nome,
               email: doc.data().email,
               idade: doc.data().idade,
+              latitude: doc.data().latitude,
+              longitude: doc.data().longitude,
             });
           });
           setUsuarios(data);
