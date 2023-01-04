@@ -7,6 +7,14 @@ export const Container = styled.SafeAreaView`
   padding-top: 20px;
 `;
 
+export const Text = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Verdana;
+  color: ${COLORS.primary};
+  padding: 20px;
+`;
+
 export const TextInput = styled.TextInput`
   width: 95%;
   height: 50px;
